@@ -7,18 +7,18 @@ librero.show() # Show books (None until now)
 marta = Librarian() # Create a Librarian
 
 marta.add(["1984","Dune","We"])
-marta.upload(librero)
-# Add 3 Books to librarian and uploads them to Library
 print("Show Librarian Books")
 marta.show()
+marta.upload(librero)
+# Add 3 Books to librarian and uploads them to Library
 print("Books in Library now")
-librero.show() # Show books (3)
+librero.show() # Shows the books and their status
 
 pedro = User() # Create a User
 print("Books of User")
 pedro.show() # Show books of User (None until now)
 
-print("Borrow Trial 1")
+print("Borrow Trial 1 (Book not in Library)")
 pedro.borrow_book("Frankenstein", librero) # Try to borrow book not in bookshelf
 pedro.show()
 print("Showing available books")
@@ -60,3 +60,5 @@ print("Show Librarian Books")
 marta.show()
 print("Show Library books")
 librero.show()
+
+lucas.is_book("Dune",librero)

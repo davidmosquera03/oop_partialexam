@@ -5,9 +5,9 @@ class Book:
         self.name = name
         self.status = "available"
         """
-        Class constructor of Book
+        Class constructor of a Book
         name: name of the Book
-        status: condition, avaible/borrowed/damaged
+        status: condition, can be avaible/borrowed/damaged/lost
         """
         
     def __repr__(self) -> str:
@@ -21,13 +21,13 @@ class Library:
     def __init__(self) -> None:
         self.Books =[]
         """
-        Class constructor of Bookshelf or Library
-        Books: list of books in Bookshelf
+        Class constructor of Library
+        Books: list of books in Library
         """
 
     def add_list(self, lista: list)->None:
         """
-        for each element in list, add Book objects
+        for each element in given list, add Book objects
         """
         for element in lista:
           B= Book(element)
@@ -35,7 +35,7 @@ class Library:
         
     def reset(self, name : str):
         """
-        sets a book status back to available
+        sets a Book status back to available
         """
         found = False
         for Book in self.Books:
@@ -47,7 +47,7 @@ class Library:
         
     def lose(self, name : str) -> None:
         """
-        sets a book status to lost
+        sets a Book status to lost
         """
         found = False
         for Book in self.Books:
@@ -59,7 +59,7 @@ class Library:
 
     def damage(self, name : str) -> None:
         """
-        sets a book status to damaged
+        sets a Book status to damaged
         """
         found = False
         for Book in self.Books:
@@ -71,23 +71,31 @@ class Library:
     
     def remove_list(self, list: List) -> None:
         """
-        give damaged or lost books to librarian
+        remove damaged or lost books 
         """
         print("libros ahora")
-        self.show()
+        self.show() 
         self.Books = [Book for Book in self.Books if Book.name not in list ]
+        # Updates books from Library removing those not in list
 
     def show(self) -> str:
+        """
+        Shows current status of Book list
+        """
         print(self.Books)
 
 
 class User:
     def __init__(self) -> None:
         self.user_books=[]
+        """
+        Class constructor of User
+        user_books: list of books it has borrowed
+        """
 
     def borrow_book(self, name: str ,library : Library)->None:
         """
-        searches in bookshelf for book
+        searches in library for book
         if it exists and is available, adds it to user list
         and changes status to borrowed
         else, shows it is not found
@@ -105,7 +113,7 @@ class User:
     def return_book(self,name: str, library : Library)->None:
         """
         If user has a given book, remove from user_books
-        and return status on bookshelf to available
+        and return status on Library to available
         """
         if name in self.user_books:
             self.user_books.remove(name)
@@ -121,11 +129,12 @@ class User:
     
     def avaiable_books(self, library : Library) -> List:
         """
-        Shows books with available status from selected Bookshelf
+        Shows books with available status from selected Library
         """
         for x in library.Books:
             if x.status=="available":
                 print(x)
+
     def report_lost(self, name: str, library : Library) -> None:
         """
         changes book status from borrowed to lost
@@ -145,6 +154,20 @@ class User:
             library.damage(name)
         else:
             print("You do not have this book")
+    def is_book(self, name: str, library: Library) -> str:
+        """
+        Shows if one specific book is in Library
+        """
+        found = False
+        for Book in library.Books:
+            if Book.name==name and Book.status=="available":
+                found = True
+                print(Book.name," is ",Book.status)
+        if(found):
+            self.user_books.append(name)
+        else:
+            print(name," has not been found in Library")
+
 
 class Librarian:
     def __init__(self) -> None:
@@ -169,7 +192,8 @@ class Librarian:
 
     def take_books(self, library : Library) -> None:
         """
-        receive list damaged and/or lost books
+        creates list of damaged and/or lost books
+        and uses it to change books in Library
         """
         list=[]
         for Book in library.Books:
@@ -178,7 +202,7 @@ class Librarian:
                 self.librarian_books.append(Book)
                 list.append(Book.name)
         library.remove_list(list)   
-        print("list is ",list)        
+        # print("list is ",list)        
     
     def show(self) -> str:
         """
