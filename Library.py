@@ -73,7 +73,6 @@ class Library:
         """
         remove damaged or lost books 
         """
-        print("libros ahora")
         self.show() 
         self.Books = [Book for Book in self.Books if Book.name not in list ]
         # Updates books from Library removing those not in list
@@ -101,13 +100,17 @@ class User:
         else, shows it is not found
         """
         found = False
+        borrowed = False
         for Book in library.Books:
             if Book.name==name and Book.status=="available":
                 Book.status="borrowed"
                 found = True
-        if(found):
+            elif Book.name==name and Book.status=="borrowed":
+                borrowed = True
+                print(name, "already borrowed")
+        if(found and not borrowed):
             self.user_books.append(name)
-        else:
+        elif(not found and not borrowed):
             print(name," not found")
             
     def return_book(self,name: str, library : Library)->None:
@@ -209,6 +212,11 @@ class Librarian:
         Shows the Books of the Librarian
         """
         print(self.librarian_books)
-        
+    
+    def dispose(self) -> None:
+        """
+        erases librarian books  
+        """
+        self.librarian_books=[]
         
     
