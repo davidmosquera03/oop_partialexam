@@ -64,6 +64,17 @@ librero.show()
 print("Search for specific book")
 lucas.is_book("Dune",librero)
 
-print("Librarian disposes of its books and uploads more")
+print("Librarian disposes of its books")
 marta.dispose()
+print("Empty librarian books")
 marta.show()
+print("Librarian adds more to itself and takes one from Library")
+marta.add(["Foundation","Fire and Blood"])
+marta.take_any("We", librero)
+marta.show()
+marta.upload(librero)
+print("Updated Library books")
+librero.show()
+
+pedro.is_book("Fire and Blood", librero) # Exact string matching not aproximate
+pedro.is_book("Fire and  Blood",librero)

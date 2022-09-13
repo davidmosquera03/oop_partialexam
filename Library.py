@@ -218,5 +218,20 @@ class Librarian:
         erases librarian books  
         """
         self.librarian_books=[]
+
+    def take_any(self, name: str, library: Library) ->None:
+        """
+        takes from Library specific available book
+        """
+        found = False
+        for Book in library.Books:
+            if Book.name==name and Book.status=="available":
+                library.Books.remove(Book)
+                self.librarian_books.append(Book.name)
+                found = True
+        if(not found):
+            print("Unable to take ",name)
+            
+
         
     
