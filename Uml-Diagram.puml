@@ -7,6 +7,7 @@ class Librarian{
 +upload()
 +take_books()
 +show()
++dispose()
 }
 class User{
 +user_books: List[str]
@@ -32,9 +33,9 @@ class Library{
     +remove_list()
 }
 
-Book"*"--o "1"Library: > is part of
-Book--o "1"Librarian: > can belong to
+Book"*"--o "1"Library
+Book--o "1"Librarian
 
-User-- Library:> borrows/returns
+User"1"-- Library:> borrows/returns
 Librarian-- Library: > modifies content of
 @enduml
