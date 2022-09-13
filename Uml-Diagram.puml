@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+
+class Librarian{
++librarian_books: List[Book]
++add()
++upload()
++take_books()
++show()
+}
+class User{
++user_books: List[str]
++borrow_book()
++return_book()
++show()
++available_books()
++report_lost()
++report_damaged()
+}
+class Book{
++ name: str
++ status: str
+}
+class Library{
+    +books: List[Book]
+    +add_list()
+    +give()
+    +reset()
+    +show()
+    +lose()
+    +damage()
+    +remove_list()
+}
+
+Book"*"--o "1"Library: > is part of
+Book--o "1"Librarian: > can belong to
+
+User-- Library:> borrows/returns
+Librarian-- Library: > modifies content of
+@enduml
