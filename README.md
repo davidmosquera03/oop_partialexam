@@ -1,6 +1,6 @@
 # oop_partialexam 
  David Hernández Mosquera
-13/09/22
+13/09/2022
 ## Explaining UML Class Diagram
 As Libraries contain Books, I create my first 2 classes
 
